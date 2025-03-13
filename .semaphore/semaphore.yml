@@ -1,15 +1,14 @@
 version: v1.0
 name: Build & Run Docker
-
 agent:
   machine:
     type: e1-standard-2
-
+    os_image: ubuntu2004
 blocks:
-  - name: "Build & Run"
+  - name: Build & Run
     task:
       jobs:
-        - name: "Build Docker"
+        - name: Build Docker
           commands:
             - echo "Bắt đầu build Docker..."
             - docker build -t myapp .
