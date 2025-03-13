@@ -1,15 +1,15 @@
 version: v1.0
-name: Build Docker
+name: Build & Run Docker
 
 agent:
   machine:
-    type: e1-standard-2  # Chạy trên máy chủ Semaphore
+    type: e1-standard-2
 
 blocks:
-  - name: "🚀 Build & Run Docker"
+  - name: "Build & Run"
     task:
       jobs:
-        - name: "Build & Run"
+        - name: "Build Docker"
           commands:
             - echo "Bắt đầu build Docker..."
             - docker build -t myapp .
