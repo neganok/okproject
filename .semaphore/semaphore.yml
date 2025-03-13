@@ -1,5 +1,5 @@
 version: v1.0
-name: R1 Pipeline Example
+name: High Performance Pipeline
 
 agent:
   machine:
