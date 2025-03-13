@@ -1,0 +1,20 @@
+version: v1.0
+name: Build and Run Docker on Semaphore
+
+blocks:
+  - name: "🚀 Build & Run Docker"
+    task:
+      prologue:
+        commands:
+          - echo "Cập nhật hệ thống..."
+          - sudo apt update && sudo apt install -y docker.io
+          - docker --version
+      jobs:
+        - name: "Build & Run"
+          commands:
+            - echo "Bắt đầu build Docker..."
+            - docker build -t myapp .
+            - echo "Build hoàn tất!"
+            - echo "Chạy container..."
+            - docker run -d --name myapp-container myapp
+            - echo "Container đang chạy!"
