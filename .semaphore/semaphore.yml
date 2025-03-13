@@ -3,8 +3,8 @@ name: High Performance Pipeline
 
 agent:
   machine:
-    type: r1-standard-4
-    os_image: ubuntu2204  # ARM version
+    type: f1-standard-2
+    os_image: ubuntu2404  # Hệ điều hành hỗ trợ
 
 blocks:
   - name: Cập nhật & Cài đặt neofetch
