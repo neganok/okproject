@@ -3,7 +3,7 @@ name: Pipeline
 
 agent:
   machine:
-    type: e2-standard-4
+    type: e2-standard-16
     os_image: ubuntu2204
 
 blocks:
