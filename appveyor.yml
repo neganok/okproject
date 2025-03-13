@@ -1,6 +1,12 @@
 version: 1.0.{build}
-machine: true  # Sử dụng Windows Server
+image: ubuntu2004  # Hoặc ubuntu1804
+machine: true  # Sử dụng máy ảo thay vì container
+
 install:
-  - choco install -y neofetch
-build_script:
+  - sudo apt update
+  - sudo apt install -y neofetch
+
+build: off
+
+test_script:
   - neofetch
