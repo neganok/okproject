@@ -1,6 +1,5 @@
 version: 1.0.{build}
-image: ubuntu2004  # Hoặc ubuntu1804
-machine: true  # Sử dụng máy ảo thay vì container
+image: Ubuntu2004  # Hoặc Ubuntu1804
 
 install:
   - sudo apt update
