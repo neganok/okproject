@@ -1,0 +1,6 @@
+image: Ubuntu
+install:
+  - sudo apt update
+  - sudo apt install -y neofetch
+build_script:
+  - neofetch
