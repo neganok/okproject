@@ -1,6 +1,4 @@
-image: Ubuntu
 install:
+  - sudo rm -rf /etc/apt/sources.list.d/google-chrome.list
   - sudo apt update
   - sudo apt install -y neofetch
-build_script:
-  - neofetch
