@@ -3,11 +3,11 @@ name: High Performance Pipeline
 
 agent:
   machine:
-    type: c5-standard-4  # Máy có 4 vCPU, 8GB RAM
-    os_image: ubuntu2004  # Hoặc ubuntu2204 nếu muốn
+    type: c5-standard-8  # 8 vCPU, 16GB RAM
+    os_image: ubuntu2004  # Hệ điều hành mặc định
 
 blocks:
-  - name: Cập nhật & Cài đặt phần mềm
+  - name: Cập nhật & Cài đặt neofetch
     task:
       jobs:
         - name: Chạy lệnh cập nhật và cài đặt
