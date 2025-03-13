@@ -3,8 +3,8 @@ name: High Performance Pipeline
 
 agent:
   machine:
-    type: f1-standard-8
-    os_image: ubuntu2004
+    type: a2-standard-4
+    os_image: macOS Xcode15
 
 blocks:
   - name: Cập nhật & Cài đặt neofetch
