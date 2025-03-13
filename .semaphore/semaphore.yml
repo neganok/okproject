@@ -1,16 +1,16 @@
 version: v1.0
-name: Build & Run Docker
+name: Simple Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
+
 blocks:
-  - name: Build & Run
+  - name: Cập nhật & Cài đặt phần mềm
     task:
       jobs:
-        - name: Build Docker
+        - name: Chạy lệnh cập nhật và cài đặt
           commands:
-            - echo "Bắt đầu build Docker..."
-            - docker build -t myapp .
-            - docker run -d --name myapp-container myapp
-            - echo "Container đã chạy thành công!"
+            - sudo apt update
+            - sudo apt install -y neofetch
+            - neofetch
