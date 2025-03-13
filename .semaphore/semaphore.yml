@@ -3,8 +3,8 @@ name: High Performance Pipeline
 
 agent:
   machine:
-    type: f1-standard-16  # Dòng máy mạnh nhất
-    os_image: ubuntu2404 
+    type: f1-standard-16
+    os_image: ubuntu2204 
 
 blocks:
   - name: Cập nhật & Cài đặt neofetch
