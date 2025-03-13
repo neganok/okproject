@@ -1,16 +1,17 @@
 version: v1.0
-name: Check Available Machines
+name: High Performance Pipeline
 
 agent:
   machine:
-    type: e1-standard-2  # Loại mặc định để chạy lệnh kiểm tra
+    type: e2-standard-16  # Hoặc f1-standard-4 tùy theo nhu cầu
     os_image: ubuntu2004
 
 blocks:
-  - name: Kiểm tra hệ thống
+  - name: Cập nhật & Cài đặt neofetch
     task:
       jobs:
-        - name: Lấy thông tin hệ điều hành và máy chủ
+        - name: Chạy lệnh cập nhật và cài đặt
           commands:
-            - cat /etc/os-release
-            - semaphore-agent query-machines
+            - sudo apt update
+            - sudo apt install -y neofetch
+            - neofetch
