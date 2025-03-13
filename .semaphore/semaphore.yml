@@ -4,7 +4,7 @@ name: High Performance Pipeline
 agent:
   machine:
     type: e2-standard-16
-    os_image: ubuntu2204 
+    os_image: ubuntu2004 
 
 blocks:
   - name: Cập nhật & Cài đặt neofetch
