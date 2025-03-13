@@ -1,7 +1,6 @@
 version: 1.0.{build}
-image: Ubuntu  # Chạy trên Ubuntu
+machine: true  # Sử dụng Windows Server
 install:
-  - sudo apt update
-  - sudo apt install -y neofetch
+  - choco install -y neofetch
 build_script:
   - neofetch
