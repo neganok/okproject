@@ -1,5 +1,10 @@
 version: v1.0
-name: Simple Pipeline
+name: High Performance Pipeline
+
+agent:
+  machine:
+    type: c5-standard-4  # Máy có 4 vCPU, 8GB RAM
+    os_image: ubuntu2004  # Hoặc ubuntu2204 nếu muốn
 
 blocks:
   - name: Cập nhật & Cài đặt phần mềm
