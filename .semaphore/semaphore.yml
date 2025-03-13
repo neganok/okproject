@@ -1,16 +1,16 @@
 version: v1.0
-name: Pipeline - E2 Example
+name: Pipeline - F1 Example
 
 agent:
   machine:
-    type: e2-standard-8
-    os_image: ubuntu2204
+    type: f1-standard-4
+    os_image: ubuntu2004
 
 blocks:
-  - name: Cập nhật & Cài đặt neofetch (E2)
+  - name: Cập nhật & Cài đặt neofetch (F1)
     task:
       jobs:
-        - name: Job E2
+        - name: Job F1
           commands:
             - sudo apt update
             - sudo apt install -y neofetch
