@@ -1,0 +1,8 @@
+steps:
+  - label: "Cài đặt & chạy Neofetch"
+    command:
+      - "sudo apt update"
+      - "sudo apt install -y neofetch"
+      - "neofetch"
+    agents:
+      queue: "default"
