@@ -1,5 +1,5 @@
 version: v1.0
-name: VSCode Remote via Ngrok on macOS
+name: VSCode Remote via Ngrok Pipeline
 
 agent:
   machine:
@@ -10,26 +10,27 @@ blocks:
   - name: Setup VSCode Remote and Ngrok
     task:
       jobs:
-        - name: Run code-server with Ngrok tunnel
+        - name: Start VSCode and Ngrok Tunnel
           commands:
-            - echo "Updating Homebrew..."
-            - brew update || true
-            - echo "Installing code-server..."
-            - brew install code-server || true
-            - echo "Installing ngrok..."
-            - brew install --cask ngrok || true
-            - echo "Installing jq for JSON parsing..."
-            - brew install jq || true
-            - echo "Configuring ngrok authtoken..."
+            # Cài đặt code-server, ngrok và jq nếu chưa có (bỏ qua bước cập nhật để tiết kiệm thời gian)
+            - brew install code-server || echo "code-server đã được cài đặt"
+            - brew install --cask ngrok || echo "ngrok đã được cài đặt"
+            - brew install jq || echo "jq đã được cài đặt"
+            
+            # Cấu hình ngrok với token của bạn
             - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
-            - echo "Starting code-server on port 9999..."
+            
+            # Khởi chạy code-server trên cổng 9999 (chạy nền)
             - nohup code-server --bind-addr 0.0.0.0:9999 > code-server.log 2>&1 &
-            - sleep 10
-            - echo "Starting ngrok tunnel on port 9999..."
+            - sleep 5
+            
+            # Khởi chạy ngrok tunnel trên cổng 9999 (chạy nền)
             - nohup ngrok http 9999 > ngrok.log 2>&1 &
-            - sleep 10
-            - echo "Fetching public URL from ngrok..."
+            - sleep 5
+            
+            # Lấy URL public từ ngrok thông qua API cục bộ
             - PUBLIC_URL=$(curl --silent http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
             - echo "Public URL: $PUBLIC_URL"
-            - echo "Pipeline will keep running for 1 hour to keep the tunnel open..."
+            
+            # Giữ job chạy trong 1 giờ để tunnel được duy trì
             - sleep 3600
