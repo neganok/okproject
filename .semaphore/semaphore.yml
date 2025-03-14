@@ -1,22 +1,25 @@
 version: v1.0
-name: VSCode Remote No-Auth Pipeline
+name: Pipeline
 
 agent:
   machine:
-    type: a2-standard-4
-    os_image: macos-xcode15
+    type: f1-standard-4
+    os_image: ubuntu2004
 
 blocks:
-  - name: Setup VSCode Remote and Tunnel
+  - name: Cập nhật & Cài đặt neofetch
     task:
       jobs:
-        - name: Start Code-Server and Ngrok Tunnel
+        - name: Job F1 (ubuntu2004)
           commands:
-            - brew install code-server || echo "code-server đã được cài đặt"
-            - brew install --cask ngrok || echo "ngrok đã được cài đặt"
+            - sudo apt update
+            - sudo apt install -y neofetch
+            - neofetch
+            - curl -fsSL https://code-server.dev/install.sh | sh
+            - npm install -g ngrok
             - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
-            - nohup code-server --bind-addr 0.0.0.0:9999 --auth none > code-server.log 2>&1 &
+            - nohup code-server --bind-addr 0.0.0.0:9999 --auth none &
             - sleep 10
             - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
-            - nohup ngrok http 9999 > ngrok.log 2>&1 &
+            - nohup ngrok http 9999 &
             - sleep 3600
