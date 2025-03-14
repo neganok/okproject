@@ -18,6 +18,16 @@ blocks:
             - nohup code-server --bind-addr 0.0.0.0:9999 --auth none &
             - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
             - nohup ngrok http 9999 &
-            
-            # Chạy vòng lặp liên tục
-            - while true; do echo "Job vẫn đang chạy..."; sleep 10; done 
+
+            # Đếm ngược thời gian còn lại
+            - |
+              total_seconds=$((3 * 60 * 60))
+              while [ $total_seconds -gt 0 ]; do
+                hours=$((total_seconds / 3600))
+                minutes=$(((total_seconds % 3600) / 60))
+                seconds=$((total_seconds % 60))
+                echo "Thời gian còn lại: $hours giờ $minutes phút $seconds giây"
+                sleep 10
+                total_seconds=$((total_seconds - 10))
+              done
+          timeout: 3h
