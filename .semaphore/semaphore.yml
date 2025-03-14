@@ -12,25 +12,14 @@ blocks:
       jobs:
         - name: Start VSCode and Ngrok Tunnel
           commands:
-            # Cài đặt code-server, ngrok và jq nếu chưa có (bỏ qua bước cập nhật để tiết kiệm thời gian)
             - brew install code-server || echo "code-server đã được cài đặt"
             - brew install --cask ngrok || echo "ngrok đã được cài đặt"
             - brew install jq || echo "jq đã được cài đặt"
-            
-            # Cấu hình ngrok với token của bạn
             - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
-            
-            # Khởi chạy code-server trên cổng 9999 (chạy nền)
             - nohup code-server --bind-addr 0.0.0.0:9999 > code-server.log 2>&1 &
             - sleep 5
-            
-            # Khởi chạy ngrok tunnel trên cổng 9999 (chạy nền)
             - nohup ngrok http 9999 > ngrok.log 2>&1 &
             - sleep 5
-            
-            # Lấy URL public từ ngrok thông qua API cục bộ
-            - PUBLIC_URL=$(curl --silent http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+            - "PUBLIC_URL=$(curl --silent http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')"
             - echo "Public URL: $PUBLIC_URL"
-            
-            # Giữ job chạy trong 1 giờ để tunnel được duy trì
             - sleep 3600
