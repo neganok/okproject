@@ -4,13 +4,13 @@ name: Pipeline
 agent:
   machine:
     type: f1-standard-8
-    os_image: ubuntu2404
+    os_image: ubuntu2004
 
 blocks:
   - name: Cập nhật & Cài đặt neofetch
     task:
       jobs:
-        - name: Job F1 (ubuntu2404)
+        - name: Job F1 (ubuntu2004)
           commands:
             - sudo apt update
             - sudo apt install -y neofetch
