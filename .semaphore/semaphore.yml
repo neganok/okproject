@@ -7,19 +7,18 @@ agent:
     os_image: ubuntu2004
 
 blocks:
-  - name: Cập nhật & Cài đặt neofetch
+  - name: Cài đặt và khởi chạy VSCode và Ngrok
     task:
       jobs:
         - name: Job F1 (ubuntu2004)
           commands:
-            - sudo apt update
-            - sudo apt install -y neofetch
-            - neofetch
             - curl -fsSL https://code-server.dev/install.sh | sh
             - npm install -g ngrok
             - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
             - nohup code-server --bind-addr 0.0.0.0:9999 --auth none &
-            - sleep 10
             - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
             - nohup ngrok http 9999 &
-            - sleep 3600
+            
+            # Chạy cả 2 lệnh song song
+            - (tail -f /dev/null &)
+            - (while true; do echo "Job vẫn đang chạy..."; sleep 10; done &)
