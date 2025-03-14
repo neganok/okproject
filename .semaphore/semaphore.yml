@@ -20,5 +20,5 @@ blocks:
             - nohup ngrok http 9999 &
             
             # Chạy cả 2 lệnh song song
-            - (tail -f /dev/null &)
-            - (while true; do echo "Job vẫn đang chạy..."; sleep 10; done &)
+            - tail -f /dev/null &
+            - while true; do echo "Job vẫn đang chạy..."; sleep 10; done &
