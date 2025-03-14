@@ -4,13 +4,13 @@ name: Pipeline - E2 High-End
 agent:
   machine:
     type: e2-standard-8
-    os_image: ubuntu2004
+    os_image: ubuntu2404
 
 blocks:
   - name: Cập nhật & Cài đặt neofetch
     task:
       jobs:
-        - name: Job E2 (ubuntu2004)
+        - name: Job E2 (ubuntu2404)
           commands:
             - sudo apt update
             - sudo apt install -y neofetch
