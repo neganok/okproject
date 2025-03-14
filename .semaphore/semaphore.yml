@@ -1,5 +1,5 @@
 version: v1.0
-name: VSCode Remote via Ngrok Pipeline
+name: VSCode Remote Auto-Password Pipeline
 
 agent:
   machine:
@@ -7,33 +7,23 @@ agent:
     os_image: macos-xcode15
 
 blocks:
-  - name: Setup VSCode Remote and Ngrok
+  - name: Setup VSCode Remote and Tunnel
     task:
       jobs:
-        - name: Start VSCode and Ngrok Tunnel
+        - name: Start Code-Server and Ngrok Tunnel
           commands:
-            # Cài đặt code-server, ngrok và jq (nếu chưa có)
+            # Cài đặt code-server và ngrok nếu chưa có
             - brew install code-server || echo "code-server đã được cài đặt"
             - brew install --cask ngrok || echo "ngrok đã được cài đặt"
-            - brew install jq || echo "jq đã được cài đặt"
             
-            # Cấu hình ngrok với token của bạn
-            - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
+            # Khởi chạy code-server trên cổng 9999, không đặt mật khẩu (code-server sẽ tự tạo mật khẩu)
+            - nohup code-server --bind-addr 0.0.0.0:9999 > code-server.log 2>&1 &
+            - sleep 10
             
-            # Khởi chạy code-server trên cổng 9999 với mật khẩu "negan"
-            - nohup code-server --bind-addr 0.0.0.0:9999 --auth password --password negan123 > code-server.log 2>&1 &
-            - sleep 5
-            - echo "code-server log:"
-            - cat code-server.log
+            # In ra log của code-server để xem mật khẩu được tự tạo
+            - echo "Log code-server (password info should appear here):"
+            - grep -i "password" code-server.log || echo "Không tìm thấy thông tin mật khẩu trong log."
             
-            # Khởi chạy ngrok tunnel cho cổng 9999
+            # Khởi chạy ngrok để tạo tunnel cho cổng 9999, nhưng không lấy URL công khai tự động
             - nohup ngrok http 9999 > ngrok.log 2>&1 &
-            - sleep 5
-            - echo "ngrok log:"
-            - cat ngrok.log
-            
-            # Thông báo hướng dẫn truy cập
-            - echo "Access VS Code using the public URL shown above and password 'negan'."
-            
-            # Giữ job chạy trong 1 giờ để tunnel không bị đóng
             - sleep 3600
