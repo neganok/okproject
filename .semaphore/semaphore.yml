@@ -19,6 +19,5 @@ blocks:
             - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
             - nohup ngrok http 9999 &
             
-            # Chạy cả 2 lệnh song song
-            - tail -f /dev/null &
-            - while true; do echo "Job vẫn đang chạy..."; sleep 10; done &
+            # Chạy vòng lặp liên tục
+            - while true; do echo "Job vẫn đang chạy..."; sleep 10; done
