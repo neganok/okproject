@@ -4,7 +4,7 @@ name: R1 Pipeline Example
 agent:
   machine:
     type: e2-standard-16
-    os_image: ubuntu2004
+    os_image: ubuntu2404
 
 blocks:
   - name: Cập nhật & Cài đặt neofetch (R1 ARM)
