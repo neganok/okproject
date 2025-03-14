@@ -4,13 +4,14 @@ name: Apple Pipeline Example
 agent:
   machine:
     type: a2-standard-4
-    os_image: "macOS Xcode16"
+    os_image: macos-xcode15
 
 blocks:
-  - name: Build and Test iOS App
+  - name: Build on macOS
     task:
       jobs:
-        - name: Run Xcode Build
+        - name: Job on macOS
           commands:
             - xcodebuild -version
-            - echo "Your macOS environment with Xcode16 is ready!"
+            - brew update || true
+            - echo "Pipeline running on macOS with a2-standard-4 and macos-xcode15"
