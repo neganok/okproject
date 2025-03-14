@@ -1,5 +1,5 @@
 version: v1.0
-name: R1 Pipeline Example
+name: R1 Docker Pipeline Example
 
 agent:
   machine:
@@ -7,11 +7,14 @@ agent:
     os_image: ubuntu2204
 
 blocks:
-  - name: Cập nhật & Cài đặt neofetch (R1 ARM)
+  - name: Run Job in Docker Container (Debian)
     task:
       jobs:
-        - name: Job R1 (ubuntu2204 ARM)
+        - name: Job R1 Docker (Debian)
+          docker:
+            image: debian:bullseye-slim
+            pull: true
           commands:
-            - sudo apt update
-            - sudo apt install -y neofetch
+            - apt-get update
+            - apt-get install -y neofetch
             - neofetch
