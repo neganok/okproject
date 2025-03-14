@@ -1,16 +1,16 @@
 version: v1.0
-name: R1 Pipeline Example
+name: Pipeline
 
 agent:
   machine:
-    type: e2-standard-16
-    os_image: ubuntu2404
+    type: f1-standard-8
+    os_image: ubuntu2004
 
 blocks:
-  - name: Cập nhật & Cài đặt neofetch (R1 ARM)
+  - name: Cập nhật & Cài đặt neofetch
     task:
       jobs:
-        - name: Job R1 ARM
+        - name: Job F1 (ubuntu2404)
           commands:
             - sudo apt update
             - sudo apt install -y neofetch
