@@ -20,6 +20,7 @@ blocks:
             - sleep 5
             - nohup ngrok http 9999 > ngrok.log 2>&1 &
             - sleep 5
-            - "PUBLIC_URL=$(curl --silent http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')"
+            - |
+              PUBLIC_URL=$(curl --silent http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
             - echo "Public URL: $PUBLIC_URL"
             - sleep 3600
