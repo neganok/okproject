@@ -11,10 +11,7 @@ blocks:
     task:
       jobs:
         - name: Job R1 Docker (Debian)
-          container:
-            image: debian:bullseye-slim
-            pull: true
           commands:
-            - apt-get update
-            - apt-get install -y neofetch
-            - neofetch
+            - docker run --rm debian:bullseye-slim apt-get update
+            - docker run --rm debian:bullseye-slim apt-get install -y neofetch
+            - docker run --rm debian:bullseye-slim neofetch
