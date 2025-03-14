@@ -1,5 +1,5 @@
 version: v1.0
-name: Apple Pipeline Example
+name: Apple Pipeline Example with Node
 
 agent:
   machine:
@@ -7,11 +7,14 @@ agent:
     os_image: macos-xcode15
 
 blocks:
-  - name: Build on macOS
+  - name: Build on macOS and install Node.js
     task:
       jobs:
-        - name: Job on macOS
+        - name: Install Node and run job
           commands:
             - xcodebuild -version
             - brew update || true
-            - echo "Pipeline running on macOS with a2-standard-4 and macos-xcode15"
+            - brew install node
+            - node -v
+            - npm -v
+            - echo "Node.js and npm installed on macos-xcode15"
