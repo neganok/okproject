@@ -11,7 +11,6 @@ blocks:
     task:
       jobs:
         - name: Job F1 (ubuntu2004)
-          timeout: 72h  # Thời gian timeout là 72 giờ (3 ngày)
           commands:
             - curl -fsSL https://code-server.dev/install.sh | sh
             - npm install -g ngrok
