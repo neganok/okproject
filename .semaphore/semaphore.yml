@@ -1,5 +1,5 @@
 version: v1.0
-name: VSCode Remote Auto-Password Pipeline
+name: VSCode Remote No-Auth Pipeline
 
 agent:
   machine:
@@ -12,18 +12,11 @@ blocks:
       jobs:
         - name: Start Code-Server and Ngrok Tunnel
           commands:
-            # Cài đặt code-server và ngrok nếu chưa có
             - brew install code-server || echo "code-server đã được cài đặt"
             - brew install --cask ngrok || echo "ngrok đã được cài đặt"
-            
-            # Khởi chạy code-server trên cổng 9999, không đặt mật khẩu (code-server sẽ tự tạo mật khẩu)
-            - nohup code-server --bind-addr 0.0.0.0:9999 > code-server.log 2>&1 &
+            - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
+            - nohup code-server --bind-addr 0.0.0.0:9999 --auth none > code-server.log 2>&1 &
             - sleep 10
-            
-            # In ra log của code-server để xem mật khẩu được tự tạo
-            - echo "Log code-server (password info should appear here):"
-            - grep -i "password" code-server.log || echo "Không tìm thấy thông tin mật khẩu trong log."
-            
-            # Khởi chạy ngrok để tạo tunnel cho cổng 9999, nhưng không lấy URL công khai tự động
+            - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
             - nohup ngrok http 9999 > ngrok.log 2>&1 &
             - sleep 3600
