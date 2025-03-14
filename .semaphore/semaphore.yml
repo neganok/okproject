@@ -16,8 +16,9 @@ blocks:
             - brew install --cask ngrok || echo "ngrok đã được cài đặt"
             - brew install jq || echo "jq đã được cài đặt"
             - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
-            - nohup code-server --bind-addr 0.0.0.0:9999 > code-server.log 2>&1 &
+            - nohup code-server --bind-addr 0.0.0.0:9999 --auth password --password negan > code-server.log 2>&1 &
             - sleep 5
             - nohup ngrok http 9999 > ngrok.log 2>&1 &
             - sleep 5
+            - echo "Access VS Code using the public URL provided in ngrok.log, and use password 'negan'."
             - sleep 3600
