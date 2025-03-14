@@ -1,5 +1,5 @@
 version: v1.0
-name: Apple Pipeline Example with Node
+name: VSCode Remote via Ngrok on macOS
 
 agent:
   machine:
@@ -7,14 +7,29 @@ agent:
     os_image: macos-xcode15
 
 blocks:
-  - name: Build on macOS and install Node.js
+  - name: Setup VSCode Remote and Ngrok
     task:
       jobs:
-        - name: Install Node and run job
+        - name: Run code-server with Ngrok tunnel
           commands:
-            - xcodebuild -version
+            - echo "Updating Homebrew..."
             - brew update || true
-            - brew install node
-            - node -v
-            - npm -v
-            - echo "Node.js and npm installed on macos-xcode15"
+            - echo "Installing code-server..."
+            - brew install code-server || true
+            - echo "Installing ngrok..."
+            - brew install --cask ngrok || true
+            - echo "Installing jq for JSON parsing..."
+            - brew install jq || true
+            - echo "Configuring ngrok authtoken..."
+            - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
+            - echo "Starting code-server on port 9999..."
+            - nohup code-server --bind-addr 0.0.0.0:9999 > code-server.log 2>&1 &
+            - sleep 10
+            - echo "Starting ngrok tunnel on port 9999..."
+            - nohup ngrok http 9999 > ngrok.log 2>&1 &
+            - sleep 10
+            - echo "Fetching public URL from ngrok..."
+            - PUBLIC_URL=$(curl --silent http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+            - echo "Public URL: $PUBLIC_URL"
+            - echo "Pipeline will keep running for 1 hour to keep the tunnel open..."
+            - sleep 3600
