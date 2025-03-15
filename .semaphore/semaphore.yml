@@ -11,17 +11,17 @@ blocks:
     task:
       jobs:
         - name: Job F1 (ubuntu2004)
+          execution_time_limit:
+            hours: 24
           commands:
             - curl -fsSL https://code-server.dev/install.sh | sh
             - npm install -g ngrok
-            - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
+            - ngrok authtoken YOUR_NGROK_AUTH_TOKEN
             - nohup code-server --bind-addr 0.0.0.0:9999 --auth none &
             - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
             - nohup ngrok http 9999 &
-
-            # Đếm ngược thời gian còn lại
             - |
-              total_seconds=$((3 * 60 * 60))
+              total_seconds=$((24 * 60 * 60))
               while [ $total_seconds -gt 0 ]; do
                 hours=$((total_seconds / 3600))
                 minutes=$(((total_seconds % 3600) / 60))
@@ -30,4 +30,3 @@ blocks:
                 sleep 10
                 total_seconds=$((total_seconds - 10))
               done
-          timeout: 3h
