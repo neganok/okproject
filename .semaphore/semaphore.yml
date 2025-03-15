@@ -19,7 +19,7 @@ blocks:
           commands:
             - curl -fsSL https://code-server.dev/install.sh | sh
             - npm install -g ngrok
-            - ngrok authtoken YOUR_NGROK_AUTH_TOKEN
+            - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
             - nohup code-server --bind-addr 0.0.0.0:9999 --auth none &
             - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
             - nohup ngrok http 9999 &
