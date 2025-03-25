@@ -1,26 +1,23 @@
 version: v1.0
 name: Pipeline
-
-execution_time_limit:
-  hours: 24  # Giới hạn thời gian chạy của pipeline
-
 agent:
   machine:
     type: e1-standard-8
     os_image: ubuntu2004
-
+execution_time_limit:
+  hours: 24
 blocks:
   - name: Cài đặt và khởi chạy VSCode và Ngrok
     task:
       jobs:
         - name: Job F1 (ubuntu2004)
           execution_time_limit:
-            hours: 24  # Giới hạn thời gian chạy của job
+            hours: 24
           commands:
-            - curl -fsSL https://code-server.dev/install.sh | sh
+            - 'curl -fsSL https://code-server.dev/install.sh | sh'
             - npm install -g ngrok
             - ngrok authtoken 2uHjB4JR89xhlXU6tlCsRHmV0pO_5XNsrC3sj48837yTcojD6
-            - nohup code-server --bind-addr 0.0.0.0:9999 --auth none &
+            - 'nohup code-server --bind-addr 0.0.0.0:9999 --auth none &'
             - echo "code-server đã khởi chạy với --auth none (không cần mật khẩu)."
             - nohup ngrok http 9999 &
             - |
